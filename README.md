@@ -7,7 +7,7 @@ ZTE F50 (Unisoc / Spreadtrum platform, firmware **B09**). Lets you:
 - **Downgrade / flash** the B09 ROM.
 - **Root** the device (Magisk-patched boot image).
 - **Unlock the bootloader** (patched trustos).
-- **Patch the modem** to allow IMEI writing via engineer mode AT commands -
+- **Patch the modem** to allow modem modification writing via engineer mode AT commands -
   and **restore** the original modem if you change your mind.
 
 > **READ THIS FIRST.**
@@ -121,7 +121,7 @@ to the prerequisites below.
    -> Device reboots into the B09 ROM
 4. flash-root_direct.bat  (optional - only if you want Magisk root)
 5. unlock-bl.bat          (REQUIRED before patch-modem.bat - see below)
-6. patch-modem.bat        (optional - enable IMEI writing via AT commands)
+6. patch-modem.bat        (optional - enable modem modification writing via AT commands)
 ```
 
 You can stop at any step. Everything past step 3 is optional **except**:
@@ -226,7 +226,7 @@ a bootloop. You'd need short-circuit mode + a full re-flash to recover.
 
 So in practice:
 
-- **Unlocked + patched modem** → IMEI writing works. ✅
+- **Unlocked + patched modem** → modem modification writing works. ✅
 - **Locked + stock everything** → factory state. ✅
 - **Locked + patched modem** → 🧱 brick.
 
@@ -236,7 +236,7 @@ don't cherry-pick `trustos` on its own.
 
 ---
 
-## Modem patch (IMEI writing) and restore
+## Modem patch (modem modification writing) and restore
 
 > **⚠️ Unlock the bootloader BEFORE running this.** A locked bootloader
 > runs verified-boot on `nr_modem_a` / `nr_modem_b`; a patched modem will
@@ -246,7 +246,7 @@ don't cherry-pick `trustos` on its own.
 > device, so you have a final safety stop - but knowing this up front
 > saves you a wasted patch run.
 
-`patch-modem.bat` enables IMEI writing through the engineer-mode AT command
+`patch-modem.bat` enables modem modification writing through the engineer-mode AT command
 interface. It does **not** ship a pre-built patched modem; instead, at
 startup it asks you where the source modem should come from:
 
@@ -298,10 +298,10 @@ Open the dialer and enter:
 Go to "AT Command" and use:
 
 ```
-AT+SPIMEI=0,"NEW_IMEI"
+AT+SPIMEI=0,"NEW_modem modification"
 ```
 
-Replace `NEW_IMEI` with your desired 15-digit IMEI.
+Replace `NEW_modem modification` with your desired 15-digit modem modification code 😁.
 
 ### Restoring the original modem
 
@@ -316,10 +316,10 @@ to point at a specific file.
 
 ### Legal warning
 
-IMEI changing without explicit manufacturer authorisation is a criminal
+modem modification changing without explicit manufacturer authorisation is a criminal
 offence in most jurisdictions (including the EU, UK, US, and Turkey).
 The legitimate use of `patch-modem.bat` is **restoring your own original
-IMEI after a wipe** - that's also exactly what `restore-modem.bat` exists
+modem modification after a wipe** - that's also exactly what `restore-modem.bat` exists
 for. Anything else is on you.
 
 ---
