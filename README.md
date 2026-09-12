@@ -20,6 +20,12 @@ ZTE F50 (Unisoc / Spreadtrum platform, firmware **B09**). Lets you:
 ## Contents
 
 ```
+
+macOS users can use the native `mac-f50/` tool. It supports Apple Silicon and
+Intel Macs, builds or installs the native `spd_dump`, reads the MU300 GPT,
+creates a lite backup, and provides an explicitly confirmed B09 flash flow.
+See [mac-f50/README.md](mac-f50/README.md) and run `mac-f50/install-mac.sh`
+before connecting the device.
 .
 ├── backup_direct.bat              # Full backup, direct USB (kickto 2)
 ├── backup_shortcircuit.bat        # Full backup, test-point/short mode

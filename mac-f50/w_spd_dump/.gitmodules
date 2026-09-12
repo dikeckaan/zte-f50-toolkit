@@ -1,0 +1,3 @@
+[submodule "sprd_fdls"]
+	path = sprd_fdls
+	url = https://github.com/iocodev/sprd_fdls.git
