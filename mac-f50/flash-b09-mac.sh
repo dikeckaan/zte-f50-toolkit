@@ -16,5 +16,8 @@ for f in "${files[@]}"; do
   [[ "$name" == userdata || "$name" == cache || "$name" == blackbox ]] && continue
   args+=(w "$name" "$f")
 done
-args+=(reset)
+# The B09 super image maps its dynamic Android partitions to slot A.  Selecting
+# A before the first boot prevents a B-slot device from reaching a zero-length
+# system_b logical partition and panicking in init.
+args+=(set_active a reset)
 exec "$SPD" "${args[@]}"
